@@ -1,0 +1,24 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/style/styles.css" rel="stylesheet">
+</head>
+<body>
+<div>
+	<header class="list-group-item-info">
+		<a href="/"><button class="btn btn-primary">Crear Pedido</button></a>
+	</header>
+	<h1>Lista de Pedidos</h1>
+	<div class="list-group">
+		{{#orders}}
+		<a class="list-group-item" href=/order/{{id}}>{{title}}</a>
+		{{/orders}}
+		</tbody>		
+	<div>
+	{{^orders}}
+	<label>Todavia no hay pedidos que mostrar.</label>
+	{{/orders}}	
+</div>	
+</body>
+</html>
