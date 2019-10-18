@@ -7,12 +7,12 @@
 <body>
 <div>
 	<header class="list-group-item-info">
-		<a href="/"><button class="btn btn-primary">Crear Pedido</button></a>
+		<a href="/new_order_form.html"><button class="btn btn-primary">Crear Pedido</button></a>
 	</header>
 	<h1>Lista de Pedidos</h1>
 	<div class="list-group">
 		{{#orders}}
-		<a class="list-group-item" href=/order/{{id}}>{{title}}</a>
+		<a class="list-group-item" href=/show/{{id}}>{{title}}</a>
 		{{/orders}}
 		</tbody>		
 	<div>

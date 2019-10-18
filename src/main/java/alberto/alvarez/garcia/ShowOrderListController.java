@@ -1,6 +1,7 @@
 
 package alberto.alvarez.garcia;
 
+import java.util.Map;
 import java.util.Optional;
 
 import javax.annotation.PostConstruct;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ShowOrderListController {
@@ -32,7 +35,7 @@ public class ShowOrderListController {
 		orderRepository.save(order2);		
 	}
 	
-	@GetMapping("/order/{id}")
+	@GetMapping("/show/{id}")
 	public String showOrder(Model model, @PathVariable Long id) {
 		System.out.println(id);
 		Optional<Order> order = orderRepository.findById(id); 
@@ -41,7 +44,18 @@ public class ShowOrderListController {
 		model.addAttribute("order", orderRepository.findById(id).get());
 		return "show_order";
 	}
-	
+
+	@GetMapping("/delete/{id}")
+	public String deleteOrder(Model model, @PathVariable Long id) {
+		System.out.println(id);
+		Optional<Order> order = orderRepository.findById(id); 
+		System.out.println(order);
+
+		orderRepository.delete(order.get());
+		
+		return "/";
+	}
+
 	@GetMapping("/")
 	public String showOrderList(Model model) {
 
@@ -50,13 +64,18 @@ public class ShowOrderListController {
 		return "show_order_list";
 	}
 	
-	/*@PostMapping("/new_order")
-	public String crearAnuncion(Model model, String nombre, String asunto, String comentario) {
+	
+	@GetMapping("/create")
+	public String createOrder(Model model, @RequestParam Map<String,String> allParams) {
 
-		OrderItem anuncio = new OrderItem(nombre, false);
-		model.addAttribute("anuncio", anuncio);
-		anuncioRepository.save(anuncio);
-		
-		return "anuncio";
-	}*/
+		Order order = new Order(allParams.get("title"));
+		for(String name : allParams.keySet()) {
+			if (name.startsWith("item-")) {
+				order.getItems().add(new OrderItem(allParams.get(name), false));
+			}
+		}
+		order = orderRepository.save(order);
+		String id = order.getId().toString();
+		return "redirect:/show/" + id;
+	}
 }

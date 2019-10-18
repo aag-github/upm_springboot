@@ -46,7 +46,11 @@ public class Order {
 		for(OrderItem item : items) {
 			itemString += item;
 		}
-		return "- " + this.id + ": " + this.title + "\n" + itemString;
+		return "- " + this.getId() + ": " + this.title + "\n" + itemString;
+	}
+
+	public Long getId() {
+		return id;
 	}
 	
 }
