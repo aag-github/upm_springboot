@@ -1,0 +1,49 @@
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/style/styles.css" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="/script/new_order_form.js"></script>
+</head>
+<body>
+{{#order}}
+	<form action="/update/{{order.id}}" method="get">
+{{/order}}
+{{^order}}
+	<form action="/create" method="get">
+{{/order}}	
+	
+		<header class="list-group-item-info">
+			<button type='submit' id="saveButton" class="btn btn-primary">Guardar</button>
+			<a href="/"><button type='button' class="btn btn-primary">Cancelar</button></a>		
+		</header>
+		<p>Titulo:</p>
+		<input type='text' name='title'
+{{#order}}
+	value="{{order.title}}"
+{{/order}}		
+		/>		
+		<p>Art&iacute;culos:</p>
+		<div>
+			<ul class="list-group">
+			<div id="items">
+{{#order.items}}			
+				<li class="list-item"><input type='text' name="item-{{-index}}" value="{{name}}"/></li>
+{{/order.items}}				
+{{^order.items}}			
+				<li class="list-item"><input type='text' name="item-1"/></li>
+{{/order.items}}				
+			</div>
+			<a href="#" onClick="addItemBox(this);"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+			</ul>
+		</div>	
+	</form>
+	<script>
+	$(function() {
+		enableSaveButton();
+		$("input").on("keyup", enableSaveButton);
+	});
+	</script>
+</body>
+</html>

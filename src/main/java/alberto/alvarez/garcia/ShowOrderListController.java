@@ -37,19 +37,24 @@ public class ShowOrderListController {
 	
 	@GetMapping("/show/{id}")
 	public String showOrder(Model model, @PathVariable Long id) {
-		System.out.println(id);
-		Optional<Order> order = orderRepository.findById(id); 
-		System.out.println(order);
-
 		model.addAttribute("order", orderRepository.findById(id).get());
 		return "show_order";
 	}
 
+	@GetMapping("/edit/{id}")
+	public String editOrder(Model model, @PathVariable Long id) {
+		model.addAttribute("order", orderRepository.findById(id).get());
+		return "edit_order_form";
+	}
+
+	@GetMapping("/new")
+	public String newOrder(Model model) {
+		return "edit_order_form";
+	}
+	
 	@GetMapping("/delete/{id}")
 	public String deleteOrder(Model model, @PathVariable Long id) {
-		System.out.println(id);
 		Optional<Order> order = orderRepository.findById(id); 
-		System.out.println(order);
 
 		orderRepository.delete(order.get());
 		
@@ -59,7 +64,7 @@ public class ShowOrderListController {
 	@GetMapping("/")
 	public String showOrderList(Model model) {
 
-		model.addAttribute("orders", orderRepository.findAll());
+		model.addAttribute("orders", orderRepository.findAllByOrderByTitleAsc());
 		
 		return "show_order_list";
 	}
@@ -68,14 +73,31 @@ public class ShowOrderListController {
 	@GetMapping("/create")
 	public String createOrder(Model model, @RequestParam Map<String,String> allParams) {
 
+		Order order = buildOrder(allParams);
+		orderRepository.save(order);
+		String id = order.getId().toString();
+		return "redirect:/show/" + id;
+	}
+	
+	@GetMapping("/update/{id}")
+	public String updateOrder(Model model, @PathVariable Long id, @RequestParam Map<String,String> allParams) {
+		Order newOrder = buildOrder(allParams);
+
+		Optional<Order> oldOrder = orderRepository.findById(id);
+	
+		orderRepository.delete(oldOrder.get());
+		orderRepository.save(newOrder);
+		
+		return "/show/" + newOrder.getId();
+	}
+
+	private Order buildOrder(Map<String,String> allParams) {
 		Order order = new Order(allParams.get("title"));
 		for(String name : allParams.keySet()) {
 			if (name.startsWith("item-")) {
 				order.getItems().add(new OrderItem(allParams.get(name), false));
 			}
 		}
-		order = orderRepository.save(order);
-		String id = order.getId().toString();
-		return "redirect:/show/" + id;
+		return order;
 	}
 }

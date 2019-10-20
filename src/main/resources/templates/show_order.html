@@ -8,7 +8,7 @@
 <div>
 	<header class="list-group-item-info">
 		<a href="/"><button class="btn btn-primary">Lista de pedidos</button></a>
-		<a href="#"><button class="btn btn-primary">Modificar pedido</button></a>
+		<a href="/edit/{{id}}"><button class="btn btn-primary">Modificar pedido</button></a>
 		<a href="/delete/{{id}}"><button class="btn btn-primary" onClick="return confirm('Está seguro?');">Borrar pedido</button></a>		
 	</header>
 	<h1>Pedido: {{order.title}}</h1>
