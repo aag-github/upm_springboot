@@ -16,7 +16,7 @@
 	
 		<header class="list-group-item-info">
 			<button type='submit' id="saveButton" class="btn btn-primary">Guardar</button>
-			<a href="/"><button type='button' class="btn btn-primary">Cancelar</button></a>		
+			<a href="/show/{{order.id}}"><button type='button' class="btn btn-primary">Cancelar</button></a>		
 		</header>
 		<p>Titulo:</p>
 		<input type='text' name='title'
@@ -29,7 +29,10 @@
 			<ul class="list-group">
 			<div id="items">
 {{#order.items}}			
-				<li class="list-item"><input type='text' name="item-{{-index}}" value="{{name}}"/></li>
+				<li class="list-item">
+					<input class="hidden" type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
+					<input type='text' name="item-{{-index}}" value="{{name}}"/>
+				</li>
 {{/order.items}}				
 {{^order.items}}			
 				<li class="list-item"><input type='text' name="item-1"/></li>

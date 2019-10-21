@@ -1,8 +1,11 @@
 
 package alberto.alvarez.garcia;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
 
@@ -73,7 +76,7 @@ public class ShowOrderListController {
 	@GetMapping("/create")
 	public String createOrder(Model model, @RequestParam Map<String,String> allParams) {
 
-		Order order = buildOrder(allParams);
+		Order order = buildNewOrder(allParams);
 		orderRepository.save(order);
 		String id = order.getId().toString();
 		return "redirect:/show/" + id;
@@ -81,17 +84,14 @@ public class ShowOrderListController {
 	
 	@GetMapping("/update/{id}")
 	public String updateOrder(Model model, @PathVariable Long id, @RequestParam Map<String,String> allParams) {
-		Order newOrder = buildOrder(allParams);
-
 		Optional<Order> oldOrder = orderRepository.findById(id);
-	
-		orderRepository.delete(oldOrder.get());
-		orderRepository.save(newOrder);
+		updateOrder(allParams, oldOrder.get());
+		orderRepository.save(oldOrder.get());		
 		
-		return "/show/" + newOrder.getId();
+		return "/show/" + oldOrder.get().getId();
 	}
 
-	private Order buildOrder(Map<String,String> allParams) {
+	private Order buildNewOrder(Map<String,String> allParams) {
 		Order order = new Order(allParams.get("title"));
 		for(String name : allParams.keySet()) {
 			if (name.startsWith("item-")) {
@@ -100,4 +100,27 @@ public class ShowOrderListController {
 		}
 		return order;
 	}
+	private void updateOrder(Map<String,String> allParams, Order order) {
+		order.setTitle(allParams.get("title"));
+		
+		order.getItems().clear();
+		
+		Pattern itemNamePattern = Pattern.compile("^item-([0-9])+$");
+		HashMap<String, String> newItems = new HashMap<>();
+		for(String name : allParams.keySet()) {
+			Matcher itemMatch = itemNamePattern.matcher(name);
+			if (itemMatch.matches()) {
+				newItems.put(itemMatch.group(1), allParams.get(name));
+			}
+		}
+	
+		for (String newItem : newItems.keySet()) {
+			String checked = allParams.get("checked-" + newItem);
+			String name = newItems.get(newItem);
+			OrderItem item = new OrderItem(name,
+										   checked != null ? checked.equals("on") : false);
+			order.getItems().add(item);
+		}
+
+	}	
 }
