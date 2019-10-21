@@ -16,7 +16,7 @@
 	
 		<header class="list-group-item-info">
 			<button type='submit' id="saveButton" class="btn btn-primary">Guardar</button>
-			<a href="/show/{{order.id}}"><button type='button' class="btn btn-primary">Cancelar</button></a>		
+			<a href="/{{#order}}show/{{order.id}}{{/order}}"><button type='button' class="btn btn-primary">Cancelar</button></a>
 		</header>
 		<p>Titulo:</p>
 		<input type='text' name='title'
