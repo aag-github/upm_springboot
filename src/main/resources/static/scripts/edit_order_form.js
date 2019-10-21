@@ -1,4 +1,4 @@
-function addItemBox(event)
+function addItem(event)
 {
 	var items = $("input[name^='item-']")
 	var newInputNode = document.createElement("input");	
@@ -17,6 +17,14 @@ function addItemBox(event)
 	
 	newInputNode.focus();	
 }
+
+function deleteItem(element)
+{
+	var deleteInputBox = document.getElementById(element.htmlFor);
+	deleteInputBox.value = "true";
+	element.parentNode.parentNode.addClass("hidden");
+}
+
 
 function enableSaveButton()
 {

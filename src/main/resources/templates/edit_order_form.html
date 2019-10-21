@@ -7,38 +7,60 @@
 	<script src="/scripts/edit_order_form.js"></script>
 </head>
 <body>
+{{#checkoff}}
+	<form action="/update_checked/{{order.id}}" method="get">
+{{/checkoff}}	
+{{^checkoff}}
 {{#order}}
 	<form action="/update/{{order.id}}" method="get">
 {{/order}}
 {{^order}}
 	<form action="/create" method="get">
 {{/order}}	
+{{/checkoff}}	
 	
 		<header class="list-group-item-info">
 			<button type='submit' id="saveButton" class="btn btn-primary">Guardar</button>
 			<a href="/{{#order}}show/{{order.id}}{{/order}}"><button type='button' class="btn btn-primary">Cancelar</button></a>
 		</header>
 		<p>Titulo:</p>
+{{#checkoff}}
+		<p>{{order.title}}</p>
+{{/checkoff}}		
+{{^checkoff}}
 		<input type='text' name='title'
 {{#order}}
 	value="{{order.title}}"
 {{/order}}		
-		/>		
+		/>
+{{/checkoff}}
 		<p>Art&iacute;culos:</p>
 		<div>
 			<ul class="list-group">
 			<div id="items">
 {{#order.items}}			
 				<li class="list-item">
+{{^checkoff}}
 					<input class="hidden" type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
 					<input type='text' name="item-{{-index}}" value="{{name}}"/>
+{{/checkoff}}					
+{{#checkoff}}
+					<div>
+						<input type='textbox' class="hidden" id="checked-{{-index}}" name="delete-{{-index}}" value="false"/>					
+						<input type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
+						<label for="checked-{{-index}}">{{name}}</label>
+						<label for="checked-{{-index}}" class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
+					</div>
+{{/checkoff}}					
 				</li>
 {{/order.items}}				
 {{^order.items}}			
 				<li class="list-item"><input type='text' name="item-1"/></li>
 {{/order.items}}				
 			</div>
-			<a href="#" onClick="addItemBox(this);"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+{{^order}}			
+			<a href="#" onClick="addItem(this);"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
+{{/order}}
 			</ul>
 		</div>	
 	</form>

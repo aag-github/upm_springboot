@@ -1,7 +1,9 @@
 
 package alberto.alvarez.garcia;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
@@ -50,6 +52,13 @@ public class ShowOrderListController {
 		return "edit_order_form";
 	}
 
+	@GetMapping("/checkoff/{id}")
+	public String checkoffOrder(Model model, @PathVariable Long id) {
+		model.addAttribute("order", orderRepository.findById(id).get());
+		model.addAttribute("checkoff", true);		
+		return "edit_order_form";
+	}
+	
 	@GetMapping("/new")
 	public String newOrder(Model model) {
 		return "edit_order_form";
@@ -91,6 +100,15 @@ public class ShowOrderListController {
 		return "/show/" + oldOrder.get().getId();
 	}
 
+	@GetMapping("/update_checked/{id}")
+	public String updateChecked(Model model, @PathVariable Long id, @RequestParam Map<String,String> allParams) {
+		Optional<Order> oldOrder = orderRepository.findById(id);
+		updateChecked(allParams, oldOrder.get());
+		orderRepository.save(oldOrder.get());		
+		
+		return "/show/" + oldOrder.get().getId();
+	}
+
 	private Order buildNewOrder(Map<String,String> allParams) {
 		Order order = new Order(allParams.get("title"));
 		for(String name : allParams.keySet()) {
@@ -122,5 +140,19 @@ public class ShowOrderListController {
 			order.getItems().add(item);
 		}
 
+	}
+	
+	private void updateChecked(Map<String,String> allParams, Order order) {
+		for(int i = 0; i < order.getItems().size(); i++) {
+			order.getItems().get(i).setChecked(allParams.containsKey("checked-" + (i + 1)));
+		}
+		List<OrderItem> itemsToDelete = new ArrayList<>();
+		for(int i = 0; i < order.getItems().size(); i++) {
+			if (allParams.get("delete-" + (i + 1)).equals("true")) {
+				itemsToDelete.add(order.getItems().get(i));
+			}
+		}		
+		order.getItems().removeAll(itemsToDelete);
 	}	
+	
 }
