@@ -70,7 +70,7 @@ public class ShowOrderListController {
 
 		orderRepository.delete(order.get());
 		
-		return "/";
+		return "redirect:/";
 	}
 
 	@GetMapping("/")
@@ -97,7 +97,7 @@ public class ShowOrderListController {
 		updateOrder(allParams, oldOrder.get());
 		orderRepository.save(oldOrder.get());		
 		
-		return "/show/" + oldOrder.get().getId();
+		return "redirect:/show/" + oldOrder.get().getId();
 	}
 
 	@GetMapping("/update_checked/{id}")
@@ -106,7 +106,7 @@ public class ShowOrderListController {
 		updateChecked(allParams, oldOrder.get());
 		orderRepository.save(oldOrder.get());		
 		
-		return "/show/" + oldOrder.get().getId();
+		return "redirect:/show/" + oldOrder.get().getId();
 	}
 
 	private Order buildNewOrder(Map<String,String> allParams) {
