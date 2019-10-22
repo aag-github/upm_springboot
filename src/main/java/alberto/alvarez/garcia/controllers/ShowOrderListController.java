@@ -1,5 +1,5 @@
 
-package alberto.alvarez.garcia;
+package alberto.alvarez.garcia.controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import alberto.alvarez.garcia.models.Order;
+import alberto.alvarez.garcia.models.OrderItem;
+import alberto.alvarez.garcia.models.OrderRepository;
 
 @Controller
 public class ShowOrderListController {

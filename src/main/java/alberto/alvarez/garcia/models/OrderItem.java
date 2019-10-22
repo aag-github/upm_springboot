@@ -1,4 +1,4 @@
-package alberto.alvarez.garcia;
+package alberto.alvarez.garcia.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

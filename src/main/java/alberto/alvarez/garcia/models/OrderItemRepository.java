@@ -1,4 +1,4 @@
-package alberto.alvarez.garcia;
+package alberto.alvarez.garcia.models;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
