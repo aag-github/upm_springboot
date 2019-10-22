@@ -13,7 +13,7 @@ function addItem(event)
 	var itemList = document.getElementById("items");	
 	itemList.appendChild(newLi);
 	
-	$("input").on("keyup", configSaveButton);
+	$("input").on("keyup", inputBoxKeyUpHandler);
 	configSaveButton();
 	configDeleteItemButtons();
 	
@@ -60,4 +60,8 @@ function configDeleteItemButtons()
 	} else {
 		deleteButtons.removeClass("hidden");
 	}
+}
+
+function inputBoxKeyUpHandler() {
+	configSaveButton();
 }
