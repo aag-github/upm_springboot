@@ -23,18 +23,18 @@
 			<button type='submit' id="saveButton" class="btn btn-primary">Guardar</button>
 			<a href="/{{#order}}show/{{order.id}}{{/order}}"><button type='button' class="btn btn-primary">Cancelar</button></a>
 		</header>
-		<p>Titulo:</p>
-{{#checkoff}}
-		<p>{{order.title}}</p>
-{{/checkoff}}		
-{{^checkoff}}
-		<input type='text' name='title'
-{{#order}}
-	value="{{order.title}}"
-{{/order}}		
-		/>
-{{/checkoff}}
-		<p>Art&iacute;culos:</p>
+		<h2>Pedido:
+		{{#checkoff}}
+			{{order.title}}</h2>
+		{{/checkoff}}
+		{{^checkoff}}
+			<input type='text' name='title'
+		{{#order}}
+			value="{{order.title}}"
+		{{/order}}		
+			/>
+		{{/checkoff}}
+		</h2>
 		<div>
 			<ul class="list-group">
 			<div id="items">
@@ -48,12 +48,15 @@
 					<input type='textbox' class="hidden" id="checked-{{-index}}" name="delete-{{-index}}" value="false"/>					
 					<input type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
 					<label for="checked-{{-index}}">{{name}}</label>
-					<label for="checked-{{-index}}" class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
+					<label for="checked-{{-index}}" class="btn" onClick="hideItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 {{/checkoff}}					
 				</li>
 {{/order.items}}				
 {{^order.items}}			
-				<li class="list-item"><input type='text' name="item-1"/></li>
+				<li class="list-item">
+					<input type='text' name="item-1"/>
+					<label class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
+				</li>
 {{/order.items}}				
 			</div>
 {{^order}}			

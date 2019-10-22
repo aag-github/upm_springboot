@@ -8,17 +8,19 @@ function addItem(event)
     var newLi = document.createElement("li");	
 	newLi.className = "list-item";
 	newLi.appendChild(newInputNode);
+	newLi.innerHTML += '<label class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>';
 	
 	var itemList = document.getElementById("items");	
 	itemList.appendChild(newLi);
 	
 	$("input").on("keyup", configSaveButton);
 	configSaveButton();
+	configDeleteItemButtons();
 	
 	newInputNode.focus();	
 }
 
-function deleteItem(element)
+function hideItem(element)
 {
 	var deleteInputBox = document.getElementById(element.htmlFor);
 	deleteInputBox.value = "true";
@@ -27,6 +29,12 @@ function deleteItem(element)
 	configDeleteItemButtons();
 }
 
+function deleteItem(element)
+{
+	element.parentNode.parentNode.removeChild(element.parentNode);
+	configSaveButton();
+	configDeleteItemButtons();
+}
 
 function configSaveButton()
 {

@@ -12,7 +12,7 @@
 		<a href="/checkoff/{{id}}"><button class="btn btn-primary">Tachar art&iacute;iculos</button></a>
 		<a href="/delete/{{id}}"><button class="btn btn-primary" onClick="return confirm('Está seguro?');">Borrar pedido</button></a>		
 	</header>
-	<h1>Pedido: {{order.title}}</h1>
+	<h2>Pedido: {{order.title}}</h2>
 	<ul class="list-group">
 		{{#order.items}}
 		<li class="list-group-item list-group-item-info">
