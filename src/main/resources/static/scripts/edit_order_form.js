@@ -6,7 +6,7 @@ function addItem(event)
 	newInputNode.setAttribute("name", "item-" + (items.length + 1));
 
     var newLi = document.createElement("li");	
-	newLi.className = "list-item";
+	newLi.className = "list-group-item list-group-item-info";
 	newLi.appendChild(newInputNode);
 	newLi.innerHTML += '<label class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>';
 	
