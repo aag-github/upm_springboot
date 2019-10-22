@@ -12,8 +12,8 @@ function addItem(event)
 	var itemList = document.getElementById("items");	
 	itemList.appendChild(newLi);
 	
-	$("input").on("keyup", enableSaveButton);
-	enableSaveButton();
+	$("input").on("keyup", configSaveButton);
+	configSaveButton();
 	
 	newInputNode.focus();	
 }
@@ -22,11 +22,13 @@ function deleteItem(element)
 {
 	var deleteInputBox = document.getElementById(element.htmlFor);
 	deleteInputBox.value = "true";
-	element.parentNode.parentNode.addClass("hidden");
+	element.parentNode.classList.add("hidden");
+	element.classList.add("hidden");
+	configDeleteItemButtons();
 }
 
 
-function enableSaveButton()
+function configSaveButton()
 {
 	var saveButton = document.getElementById("saveButton");
 
@@ -38,4 +40,15 @@ function enableSaveButton()
 		}
 	})
 	saveButton.disabled = anyEmpty;	
+}
+
+function configDeleteItemButtons()
+{
+	var deleteButtons = $("label .glyphicon-trash");
+	var buttonContainers = $("label .glyphicon-trash").parent().not(".hidden");	
+	if (buttonContainers.length == 1) {
+		deleteButtons.addClass("hidden");
+	} else {
+		deleteButtons.removeClass("hidden");
+	}
 }

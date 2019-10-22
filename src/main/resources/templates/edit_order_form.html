@@ -45,12 +45,10 @@
 					<input type='text' name="item-{{-index}}" value="{{name}}"/>
 {{/checkoff}}					
 {{#checkoff}}
-					<div>
-						<input type='textbox' class="hidden" id="checked-{{-index}}" name="delete-{{-index}}" value="false"/>					
-						<input type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
-						<label for="checked-{{-index}}">{{name}}</label>
-						<label for="checked-{{-index}}" class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
-					</div>
+					<input type='textbox' class="hidden" id="checked-{{-index}}" name="delete-{{-index}}" value="false"/>					
+					<input type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
+					<label for="checked-{{-index}}">{{name}}</label>
+					<label for="checked-{{-index}}" class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 {{/checkoff}}					
 				</li>
 {{/order.items}}				
@@ -66,8 +64,9 @@
 	</form>
 	<script>
 	$(function() {
-		enableSaveButton();
-		$("input").on("keyup", enableSaveButton);
+		configSaveButton();
+		configDeleteItemButtons();
+		$("input").on("keyup", configSaveButton);
 	});
 	</script>
 </body>
