@@ -51,8 +51,8 @@
 	{{/checkoff}}					
 	{{#checkoff}}
 					<input type='textbox' class="hidden" id="checked-{{-index}}" name="delete-{{-index}}" value="false"/>					
-					<input type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
-					<label for="checked-{{-index}}">{{name}}</label>
+					<input type='checkbox' id="check-off-{{-index}}" name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
+					<label for="check-off-{{-index}}">{{name}}</label>
 					<label for="checked-{{-index}}" class="btn" onClick="hideItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 	{{/checkoff}}					
 				</li>
