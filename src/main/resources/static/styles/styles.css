@@ -8,12 +8,6 @@ header
 	padding: 5px;	
 }
 
-.padded 
-{
-	padding: 5px;	
-	background-color: red;
-}
-
 input[type=checkbox] + label {
 	font-weight: normal;
 }
