@@ -39,7 +39,7 @@
 			<ul class="list-group">
 			<div id="items">
 {{#order.items}}			
-				<li class="list-group-item list-group-item-info"">
+				<li class="list-group-item list-group-item-info">
 {{^checkoff}}
 					<input class="hidden" type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
 					<input type='text' name="item-{{-index}}" value="{{name}}"/>
@@ -53,7 +53,7 @@
 				</li>
 {{/order.items}}				
 {{^order.items}}			
-				<li class="list-group-item list-group-item-info"">
+				<li class="list-group-item list-group-item-info">
 					<input type='text' name="item-1"/>
 					<label class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 				</li>
