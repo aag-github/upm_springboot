@@ -12,9 +12,11 @@
 	<h2>Lista de Pedidos</h2>
 	<div class="list-group">
 		{{#orders}}
-		<a class="list-group-item list-group-item-info" href=/show/{{id}}>{{title}}</a>
+		<div class="list-group-item list-group-item-info">
+			<a href=/show/{{id}}>{{title}}</a>
+			<a href="/delete/{{id}}"><label class="btn" onClick="return confirm('Está seguro?');"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label></a>
+		</div>
 		{{/orders}}
-		</tbody>		
 	<div>
 	{{^orders}}
 	<label>Todavia no hay pedidos que mostrar.</label>

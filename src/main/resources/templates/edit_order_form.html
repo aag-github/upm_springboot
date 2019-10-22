@@ -36,6 +36,11 @@
 		{{/checkoff}}
 		</h2>
 		<div>
+{{^order}}
+			<div>
+				<a href="#" onClick="addItem(this);"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> A&ntildeadir art&iacute;culo</a>
+			</div>
+{{/order}}
 			<ul class="list-group">
 			<div id="items">
 {{#order.items}}			
@@ -59,9 +64,6 @@
 				</li>
 {{/order.items}}				
 			</div>
-{{^order}}			
-			<a href="#" onClick="addItem(this);"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></a>
-{{/order}}
 			</ul>
 		</div>	
 	</form>
