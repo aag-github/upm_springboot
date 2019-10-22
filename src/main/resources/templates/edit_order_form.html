@@ -8,14 +8,14 @@
 </head>
 <body>
 {{#checkoff}}
-	<form action="/update_checked/{{order.id}}" method="get">
+	<form action="/update_checked/{{order.id}}" method="post">
 {{/checkoff}}	
 {{^checkoff}}
 	{{#order}}
-		<form action="/update/{{order.id}}" method="get">
+		<form action="/update/{{order.id}}" method="post">
 	{{/order}}
 	{{^order}}
-		<form action="/create" method="get">
+		<form action="/create" method="post">
 	{{/order}}	
 {{/checkoff}}	
 	

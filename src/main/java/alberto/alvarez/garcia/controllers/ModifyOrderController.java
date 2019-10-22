@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import alberto.alvarez.garcia.models.Order;
@@ -49,7 +50,7 @@ public class ModifyOrderController {
 		return "edit_order_form";
 	}
 
-	@GetMapping("/create")
+	@PostMapping("/create")
 	public String createOrder(Model model, @RequestParam Map<String,String> allParams) {
 
 		Order order = buildNewOrder(allParams);
@@ -58,7 +59,7 @@ public class ModifyOrderController {
 		return "redirect:/show/" + id;
 	}
 	
-	@GetMapping("/update/{id}")
+	@PostMapping("/update/{id}")
 	public String updateOrder(Model model, @PathVariable Long id, @RequestParam Map<String,String> allParams) {
 		Optional<Order> oldOrder = orderRepository.findById(id);
 		updateOrder(allParams, oldOrder.get());
@@ -67,7 +68,7 @@ public class ModifyOrderController {
 		return "redirect:/show/" + oldOrder.get().getId();
 	}
 
-	@GetMapping("/update_checked/{id}")
+	@PostMapping("/update_checked/{id}")
 	public String updateChecked(Model model, @PathVariable Long id, @RequestParam Map<String,String> allParams) {
 		Optional<Order> oldOrder = orderRepository.findById(id);
 		updateChecked(allParams, oldOrder.get());
