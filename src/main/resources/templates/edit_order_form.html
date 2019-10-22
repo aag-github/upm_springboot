@@ -11,12 +11,12 @@
 	<form action="/update_checked/{{order.id}}" method="get">
 {{/checkoff}}	
 {{^checkoff}}
-{{#order}}
-	<form action="/update/{{order.id}}" method="get">
-{{/order}}
-{{^order}}
-	<form action="/create" method="get">
-{{/order}}	
+	{{#order}}
+		<form action="/update/{{order.id}}" method="get">
+	{{/order}}
+	{{^order}}
+		<form action="/create" method="get">
+	{{/order}}	
 {{/checkoff}}	
 	
 		<header class="list-group-item-info">
@@ -29,9 +29,9 @@
 		{{/checkoff}}
 		{{^checkoff}}
 			<input type='text' name='title'
-		{{#order}}
-			value="{{order.title}}"
-		{{/order}}		
+			{{#order}}
+				value="{{order.title}}"
+			{{/order}}		
 			/>
 		{{/checkoff}}
 		</h2>
@@ -40,16 +40,16 @@
 			<div id="items">
 {{#order.items}}			
 				<li class="list-group-item list-group-item-info">
-{{^checkoff}}
+	{{^checkoff}}
 					<input class="hidden" type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
 					<input type='text' name="item-{{-index}}" value="{{name}}"/>
-{{/checkoff}}					
-{{#checkoff}}
+	{{/checkoff}}					
+	{{#checkoff}}
 					<input type='textbox' class="hidden" id="checked-{{-index}}" name="delete-{{-index}}" value="false"/>					
 					<input type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
 					<label for="checked-{{-index}}">{{name}}</label>
 					<label for="checked-{{-index}}" class="btn" onClick="hideItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
-{{/checkoff}}					
+	{{/checkoff}}					
 				</li>
 {{/order.items}}				
 {{^order.items}}			

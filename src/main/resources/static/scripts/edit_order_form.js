@@ -17,7 +17,8 @@ function addItem(event)
 	configSaveButton();
 	configDeleteItemButtons();
 	
-	newInputNode.focus();	
+	newLi.childNodes[0].focus();
+	//newInputNode.focus();
 }
 
 function hideItem(element)
