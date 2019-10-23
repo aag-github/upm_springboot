@@ -49,11 +49,12 @@ function configSaveButton()
 function configDeleteItemButtons()
 {
 	var deleteButtons = $("label .glyphicon-trash");
-	var buttonContainers = $("label .glyphicon-trash").parent().not(".hidden");	
-	if (buttonContainers.length == 1) {
-		deleteButtons.addClass("hidden");
-	} else {
-		deleteButtons.removeClass("hidden");
+	if (deleteButtons.length >  0) {
+		if (deleteButtons.length == 1) {
+			deleteButtons.parent().addClass("hidden");
+		} else {
+			deleteButtons.parent().removeClass("hidden");
+		}
 	}
 }
 
