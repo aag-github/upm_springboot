@@ -43,17 +43,19 @@
 {{/order}}
 			<ul class="list-group">
 			<div id="items">
-{{#order.items}}			
+{{#order.items}}
+	{{#checkoff}}
+				<input type='textbox' class="hidden" id="checked-{{-index}}" name="delete-{{-index}}" value="false"/>					
+	{{/checkoff}}
 				<li class="list-group-item list-group-item-info">
 	{{^checkoff}}
 					<input class="hidden" type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
 					<input type='text' name="item-{{-index}}" value="{{name}}"/>
 	{{/checkoff}}					
 	{{#checkoff}}
-					<input type='textbox' class="hidden" id="checked-{{-index}}" name="delete-{{-index}}" value="false"/>					
 					<input type='checkbox' id="check-off-{{-index}}" name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
 					<label for="check-off-{{-index}}">{{name}}</label>
-					<label for="checked-{{-index}}" class="btn" onClick="hideItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
+					<label for="checked-{{-index}}" class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 	{{/checkoff}}					
 				</li>
 {{/order.items}}				

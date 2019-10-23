@@ -21,17 +21,12 @@ function addItem(event)
 	//newInputNode.focus();
 }
 
-function hideItem(element)
-{
-	var deleteInputBox = document.getElementById(element.htmlFor);
-	deleteInputBox.value = "true";
-	element.parentNode.classList.add("hidden");
-	element.classList.add("hidden");
-	configDeleteItemButtons();
-}
-
 function deleteItem(element)
 {
+	var deleteInputBox = document.getElementById(element.htmlFor);
+	if (deleteInputBox) {
+		deleteInputBox.value = "true";
+	}
 	element.parentNode.parentNode.removeChild(element.parentNode);
 	configSaveButton();
 	configDeleteItemButtons();
