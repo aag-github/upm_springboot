@@ -36,17 +36,15 @@
 		{{/checkoff}}
 		</h2>
 		<div>
-{{^order}}
+{{^checkoff}}
 			<div>
 				<a href="#" onClick="addItem(this);"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> A&ntildeadir art&iacute;culo</a>
 			</div>
-{{/order}}
+{{/checkoff}}
 			<ul class="list-group">
 			<div id="items">
 {{#order.items}}
-	{{#checkoff}}
 				<input type='textbox' class="hidden" id="checked-{{-index}}" name="delete-{{-index}}" value="false"/>					
-	{{/checkoff}}
 				<li class="list-group-item list-group-item-info">
 	{{^checkoff}}
 					<input class="hidden" type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
@@ -55,16 +53,16 @@
 	{{#checkoff}}
 					<input type='checkbox' id="check-off-{{-index}}" name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
 					<label for="check-off-{{-index}}">{{name}}</label>
-					<label for="checked-{{-index}}" class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 	{{/checkoff}}					
+					<label for="checked-{{-index}}" class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 				</li>
 {{/order.items}}				
 {{^order.items}}			
 				<li class="list-group-item list-group-item-info">
-					<input type='text' name="item-1"/>
+					<input type='text' name="new-item-1"/>
 					<label class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 				</li>
-{{/order.items}}				
+{{/order.items}}
 			</div>
 			</ul>
 		</div>	
