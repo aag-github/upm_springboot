@@ -1,23 +1,17 @@
 function addItem()
 {
-	var newInputNode = document.createElement("input");	
-	newInputNode.setAttribute("type", "text");	
-	newInputNode.setAttribute("name", "newitem");
-
-    var newLi = document.createElement("li");	
-	newLi.className = "list-group-item list-group-item-info";
-	newLi.appendChild(newInputNode);
-	newLi.innerHTML += '<label class="btn delete-node-to-hide" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>';
+	var itemToClone = $(".new-item-to-clone");
+	var clone = itemToClone.clone(true);
+	clone.find("input").removeClass("hidden");
 	
 	var itemList = document.getElementById("items");	
-	itemList.appendChild(newLi);
+	clone = itemList.appendChild(clone[0]);
+	clone.classList.remove("new-item-to-clone", "hidden");
 	
-	$("input").on("keyup", inputBoxKeyUpHandler);
+	$("input").on("keyup", inputBoxKeyUpHandler);	
 	configSaveButton();
 	configDeleteItemButtons();
-	
-	newLi.childNodes[0].focus();
-	//newInputNode.focus();
+    $(clone).find("input").focus();	
 }
 
 function deleteItem(element)
@@ -36,7 +30,7 @@ function configSaveButton()
 	var saveButton = document.getElementById("saveButton");
 
 	var anyEmpty = false;	
-	$("input").each(function(){
+	$("input").not(".hidden").each(function(){
 		if (!($(this).val().trim())) {
 			anyEmpty = true;
 			return false;
@@ -49,7 +43,8 @@ function configDeleteItemButtons()
 {
 	var deleteButtons = $(".delete-node-to-hide");
 	if (deleteButtons.length >  0) {
-		if (deleteButtons.length == 1) {
+		// There is one button hidden to clone, hence length == 2
+		if (deleteButtons.length == 2) {
 			deleteButtons.addClass("hidden");
 		} else {
 			deleteButtons.removeClass("hidden");

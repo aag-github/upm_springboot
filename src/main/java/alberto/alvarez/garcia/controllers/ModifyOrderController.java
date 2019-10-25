@@ -92,9 +92,7 @@ public class ModifyOrderController {
 
 	private Order buildNewOrder(String title, List<String>newItems) {
 		Order order = new Order(title);
-		for(String name : newItems) {
-			order.getItems().add(new OrderItem(name, false));
-		}
+		addNewItems(newItems, order);
 		return order;
 	}
 
@@ -110,11 +108,8 @@ public class ModifyOrderController {
 		}
 		
 		updateDeleted(allParams, order);
-		
 		if(newItems != null) {
-			for(String name : newItems) {
-				order.getItems().add(new OrderItem(name, false));
-			}
+			addNewItems(newItems, order);
 		}
 	}
 	
@@ -134,5 +129,15 @@ public class ModifyOrderController {
 			}
 		}		
 		order.getItems().removeAll(itemsToDelete);
-	}	
+	}
+	
+	private Order addNewItems(List<String>newItems, Order order) {
+		for(String name : newItems) {
+			if(name.trim() != "") {
+				order.getItems().add(new OrderItem(name, false));
+			}
+		}
+		return order;
+	}
+	
 }
