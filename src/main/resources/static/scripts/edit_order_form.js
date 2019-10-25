@@ -1,4 +1,4 @@
-function addItem(event)
+function addItem()
 {
 	var newInputNode = document.createElement("input");	
 	newInputNode.setAttribute("type", "text");	
@@ -7,7 +7,7 @@ function addItem(event)
     var newLi = document.createElement("li");	
 	newLi.className = "list-group-item list-group-item-info";
 	newLi.appendChild(newInputNode);
-	newLi.innerHTML += '<label class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>';
+	newLi.innerHTML += '<label class="btn delete-node-to-hide" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>';
 	
 	var itemList = document.getElementById("items");	
 	itemList.appendChild(newLi);
@@ -47,12 +47,12 @@ function configSaveButton()
 
 function configDeleteItemButtons()
 {
-	var deleteButtons = $("label .glyphicon-trash");
+	var deleteButtons = $(".delete-node-to-hide");
 	if (deleteButtons.length >  0) {
 		if (deleteButtons.length == 1) {
-			deleteButtons.parent().addClass("hidden");
+			deleteButtons.addClass("hidden");
 		} else {
-			deleteButtons.parent().removeClass("hidden");
+			deleteButtons.removeClass("hidden");
 		}
 	}
 }

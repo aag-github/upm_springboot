@@ -54,13 +54,13 @@
 					<input type='checkbox' id="check-off-{{-index}}" name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
 					<label for="check-off-{{-index}}">{{name}}</label>
 	{{/checkoff}}					
-					<label for="checked-{{-index}}" class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
+					<label for="checked-{{-index}}" class="delete-node-to-hide btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 				</li>
-{{/order.items}}				
-{{^order.items}}			
+{{/order.items}}
+{{^order.items}}
 				<li class="list-group-item list-group-item-info">
 					<input type='text' name="newitem"/>
-					<label class="btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
+					<label class="delete-node-to-hide btn" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 				</li>
 {{/order.items}}
 			</div>
