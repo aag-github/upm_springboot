@@ -97,6 +97,7 @@ public class ModifyOrderController {
 		}
 		return order;
 	}
+
 	private void updateOrder(Map<String,String> allParams, List<String> newItems, Order order) {
 		order.setTitle(allParams.get("title"));	
 		
