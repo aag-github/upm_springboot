@@ -61,9 +61,12 @@ public class ModifyOrderController {
 	}
 	
 	@PostMapping("/update/{id}")
-	public String updateOrder(Model model, @PathVariable Long id, @RequestParam Map<String,String> allParams) {
+	public String updateOrder(Model model,
+								@PathVariable Long id,
+								@RequestParam Map<String,String> allParams,
+								@RequestParam(required=false) List<String> newitem) {
 		Optional<Order> oldOrder = orderRepository.findById(id);
-		updateOrder(allParams, oldOrder.get());
+		updateOrder(allParams, newitem, oldOrder.get());
 		orderRepository.save(oldOrder.get());		
 		
 		return "redirect:/show/" + oldOrder.get().getId();
@@ -72,7 +75,7 @@ public class ModifyOrderController {
 	@PostMapping("/update_checked/{id}")
 	public String updateChecked(Model model, @PathVariable Long id, @RequestParam Map<String,String> allParams) {
 		Optional<Order> oldOrder = orderRepository.findById(id);
-		updateChecked(allParams, oldOrder.get());
+		updateCheckedOffOrder(allParams, oldOrder.get());
 		orderRepository.save(oldOrder.get());		
 		
 		return "redirect:/show/" + oldOrder.get().getId();
@@ -94,34 +97,35 @@ public class ModifyOrderController {
 		}
 		return order;
 	}
-	private void updateOrder(Map<String,String> allParams, Order order) {
-		order.setTitle(allParams.get("title"));
-		
-		order.getItems().clear();
+	private void updateOrder(Map<String,String> allParams, List<String> newItems, Order order) {
+		order.setTitle(allParams.get("title"));	
 		
 		Pattern itemNamePattern = Pattern.compile("^item-([0-9])+$");
-		HashMap<String, String> newItems = new HashMap<>();
 		for(String name : allParams.keySet()) {
 			Matcher itemMatch = itemNamePattern.matcher(name);
 			if (itemMatch.matches()) {
-				newItems.put(itemMatch.group(1), allParams.get(name));
+				order.getItems().get(Integer.parseInt(itemMatch.group(1))-1).setName(allParams.get(name));
 			}
 		}
-	
-		for (String newItem : newItems.keySet()) {
-			String checked = allParams.get("checked-" + newItem);
-			String name = newItems.get(newItem);
-			OrderItem item = new OrderItem(name,
-										   checked != null ? checked.equals("on") : false);
-			order.getItems().add(item);
+		
+		updateDeleted(allParams, order);
+		
+		if(newItems != null) {
+			for(String name : newItems) {
+				order.getItems().add(new OrderItem(name, false));
+			}
 		}
-
 	}
 	
-	private void updateChecked(Map<String,String> allParams, Order order) {
+	private void updateCheckedOffOrder(Map<String,String> allParams, Order order) {
 		for(int i = 0; i < order.getItems().size(); i++) {
 			order.getItems().get(i).setChecked(allParams.containsKey("checked-" + (i + 1)));
 		}
+		updateDeleted(allParams, order);
+	}	
+
+	
+	private void updateDeleted(Map<String,String> allParams, Order order) {
 		List<OrderItem> itemsToDelete = new ArrayList<>();
 		for(int i = 0; i < order.getItems().size(); i++) {
 			if (allParams.get("delete-" + (i + 1)).equals("true")) {
@@ -130,5 +134,4 @@ public class ModifyOrderController {
 		}		
 		order.getItems().removeAll(itemsToDelete);
 	}	
-	
 }
