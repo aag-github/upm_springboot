@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 
 import alberto.alvarez.garcia.models.Order;
 import alberto.alvarez.garcia.models.OrderItem;
@@ -51,9 +52,9 @@ public class ModifyOrderController {
 	}
 
 	@PostMapping("/create")
-	public String createOrder(Model model, @RequestParam Map<String,String> allParams) {
+	public String createOrder(Model model, @RequestParam String title, @RequestParam List<String> newitem) {
 
-		Order order = buildNewOrder(allParams);
+		Order order = buildNewOrder(title, newitem);
 		orderRepository.save(order);
 		String id = order.getId().toString();
 		return "redirect:/show/" + id;
@@ -86,12 +87,10 @@ public class ModifyOrderController {
 		return "redirect:/";
 	}
 
-	private Order buildNewOrder(Map<String,String> allParams) {
-		Order order = new Order(allParams.get("title"));
-		for(String name : allParams.keySet()) {
-			if (name.startsWith("item-")) {
-				order.getItems().add(new OrderItem(allParams.get(name), false));
-			}
+	private Order buildNewOrder(String title, List<String>newItems) {
+		Order order = new Order(title);
+		for(String name : newItems) {
+			order.getItems().add(new OrderItem(name, false));
 		}
 		return order;
 	}

@@ -1,9 +1,8 @@
 function addItem(event)
 {
-	var items = $("input[name^='item-']")
 	var newInputNode = document.createElement("input");	
 	newInputNode.setAttribute("type", "text");	
-	newInputNode.setAttribute("name", "item-" + (items.length + 1));
+	newInputNode.setAttribute("name", "newitem");
 
     var newLi = document.createElement("li");	
 	newLi.className = "list-group-item list-group-item-info";
