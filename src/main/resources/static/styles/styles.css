@@ -16,3 +16,21 @@ input[type=checkbox]:checked + label {
 	font-weight: normal;
 	text-decoration: line-through;
 } 
+
+.hidden {
+	display: none;
+}
+
+.glyphicon-trash{
+	content: url('https://api.iconify.design/fa-regular:trash-alt.svg?height=16');
+	vertical-align: -0.125em;
+}
+
+.glyphicon-plus-sign {
+	content: url('https://api.iconify.design/feather:plus-circle.svg?height=16');
+	vertical-align: -0.125em;
+}
+
+.btn-glyphicon {
+	padding: 5px;
+}

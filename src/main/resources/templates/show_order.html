@@ -1,18 +1,20 @@
 <html>
 <head>
 	<meta charset="UTF-8"/>
-	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">	
+	<link href="/mdb/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/mdb/css/mdb.min.css" rel="stylesheet">
 	<link href="/styles/styles.css" rel="stylesheet">	
 </head>
 <body>
 <div>
-	<header class="list-group-item-info">
+	<h2>Pedido</h2>
+	<header class="">
 		<a href="/"><button class="btn btn-primary">Lista de pedidos</button></a>
 		<a href="/edit/{{id}}"><button class="btn btn-primary">Modificar pedido</button></a>
 		<a href="/checkoff/{{id}}"><button class="btn btn-primary">Tachar art&iacute;culos</button></a>
 		<a href="/delete/{{id}}"><button class="btn btn-primary" onClick="return confirm('Está seguro?');">Borrar pedido</button></a>		
 	</header>
-	<h2>Pedido: {{order.title}}</h2>
+	<h2>{{order.title}}</h2>
 	<ul class="list-group">
 		{{#order.items}}
 		<li class="list-group-item list-group-item-info">

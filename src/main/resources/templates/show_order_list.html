@@ -1,20 +1,23 @@
 <html>
 <head>
 	<meta charset="UTF-8"/>
-	<link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/mdb/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/mdb/css/mdb.min.css" rel="stylesheet">
+	<script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
 	<link href="/styles/styles.css" rel="stylesheet">
 </head>
 <body>
 <div>
-	<header class="list-group-item-info">
+	<h2>Lista de Pedidos</h2>
+	<header class="">
 		<a href="/new"><button class="btn btn-primary">Crear Pedido</button></a>
 	</header>
-	<h2>Lista de Pedidos</h2>
+
 	<div class="list-group">
 		{{#orders}}
 		<div class="list-group-item list-group-item-info">
 			<a href=/show/{{id}}>{{title}}</a>
-			<a href="/delete/{{id}}"><label class="btn" onClick="return confirm('Está seguro?');"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label></a>
+			<a href="/delete/{{id}}"><label class="btn btn-glyphicon" onClick="return confirm('Está seguro?');"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label></a>
 		</div>
 		{{/orders}}
 	<div>
