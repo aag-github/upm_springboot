@@ -41,7 +41,7 @@ function configSaveButton()
 
 function configDeleteItemButtons()
 {
-	var deleteButtons = $(".delete-node-to-hide");
+	var deleteButtons = $(".trash-node-to-hide");
 	if (deleteButtons.length >  0) {
 		// There is one button hidden to clone, hence length == 2
 		// means that there is only one available node left

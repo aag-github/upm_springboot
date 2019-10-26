@@ -35,18 +35,26 @@ public class ModifyOrderController {
 	
 	@GetMapping("/new")
 	public String newOrder(Model model) {
+		model.addAttribute("action", "/create");
+		model.addAttribute("title", "");
 		return "edit_order_form";
 	}
 	
 	@GetMapping("/edit/{id}")
 	public String editOrder(Model model, @PathVariable Long id) {
-		model.addAttribute("order", orderRepository.findById(id).get());
+		Order order = orderRepository.findById(id).get();
+		model.addAttribute("order", order);
+		model.addAttribute("action", "/update/" + id);
+		model.addAttribute("title", order.getTitle());
 		return "edit_order_form";
 	}
 
 	@GetMapping("/checkoff/{id}")
 	public String checkoffOrder(Model model, @PathVariable Long id) {
-		model.addAttribute("order", orderRepository.findById(id).get());
+		Order order = orderRepository.findById(id).get();
+		model.addAttribute("order", order);
+		model.addAttribute("action", "/update_checked/" + id);
+		model.addAttribute("title", order.getTitle());
 		model.addAttribute("checkoff", true);		
 		return "edit_order_form";
 	}
