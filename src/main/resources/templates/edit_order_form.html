@@ -45,8 +45,10 @@
 					<input class="col-md-10" type='text' name="item-{{-index}}" value="{{name}}"/>
 	{{/checkoff}}					
 	{{#checkoff}}
-					<input type='checkbox' id="check-off-{{-index}}" name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
-					<label for="check-off-{{-index}}">{{name}}</label>
+					<div class="custom-control custom-checkbox float-left">
+						<input type='checkbox' class="custom-control-input" id="check-off-{{-index}}" name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
+						<label class="custom-control-label" for="check-off-{{-index}}">{{name}}</label>
+					</div>
 	{{/checkoff}}					
 					<label for="checked-{{-index}}" class="trash-node-to-hide btn btn-glyphicon" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 				</li>
