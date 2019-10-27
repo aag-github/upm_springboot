@@ -6,29 +6,32 @@
 	<link href="/styles/styles.css" rel="stylesheet">	
 </head>
 <body>
-<div>
-	<h2>Pedido</h2>
-	<header class="">
-		<a href="/"><button class="btn btn-primary">Lista de pedidos</button></a>
-		<a href="/edit/{{id}}"><button class="btn btn-primary">Modificar pedido</button></a>
-		<a href="/checkoff/{{id}}"><button class="btn btn-primary">Tachar art&iacute;culos</button></a>
-		<a href="/delete/{{id}}"><button class="btn btn-primary" onClick="return confirm('Está seguro?');">Borrar pedido</button></a>		
-	</header>
-	<h2>{{order.title}}</h2>
-	<ul class="list-group">
-		{{#order.items}}
-		<li class="list-group-item list-group-item-info">
-			{{#checked}}
-			<del> 
-			{{/checked}}	
-			{{name}}
-			{{#checked}}
-			</del> 
-			{{/checked}}	
-		</li>
-		{{/order.items}}
-		</tbody>		
-	</ul>
-</div>
+	<h2>Detalle <span>Pedido</span></h2>
+	<div class="card col-md-12 mb-3">
+		<div class="card-body card-body-tiny-padding">
+			<a href="/"><button class="btn btn-primary">Lista de pedidos</button></a>
+			<a href="/edit/{{id}}"><button class="btn btn-primary">Modificar pedido</button></a>
+			<a href="/checkoff/{{id}}"><button class="btn btn-primary">Tachar art&iacute;culos</button></a>
+			<a href="/delete/{{id}}"><button class="btn btn-primary" onClick="return confirm('Está seguro?');">Borrar pedido</button></a>		
+		</div>
+	</div>
+	<div class="card col-md-4 mb-3 card-top-bottom-padding">
+		<div class="card-body card-body-tiny-padding">
+			<h3>{{order.title}}</h3>
+			<ul class="list-group">
+				{{#order.items}}
+				<li class="list-group-item list-group-item-info">
+					{{#checked}}
+					<del> 
+						{{/checked}}	
+						{{name}}
+						{{#checked}}
+					</del> 
+					{{/checked}}
+				</li>
+				{{/order.items}}
+			</ul>
+		</div>
+	</div>
 </body>
 </html>

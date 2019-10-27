@@ -8,20 +8,25 @@
 	<script src="/scripts/edit_order_form.js"></script>
 </head>
 <body>
-	<h2>Pedido</h2>
-	<form action="{{action}}" method="post">	
-		<header>
-			<button type='submit' id="saveButton" class="btn btn-primary">Guardar</button>
-			<a href="/{{#order}}show/{{order.id}}{{/order}}"><button type='button' class="btn btn-primary">Cancelar</button></a>
-		</header>
-		<h2>
+	<h2>Edici&oacute;n <span>Pedido</span></h2>
+
+	<form action="{{action}}" method="post">
+		<div class="card col-md-12 mb-3">
+			<div class="card-body card-body-tiny-padding">	
+				<button type='submit' id="saveButton" class="btn btn-primary">Guardar</button>
+				<a href="/{{#order}}show/{{order.id}}{{/order}}"><button type='button' class="btn btn-primary">Cancelar</button></a>
+			</div>
+		</div>
+		<div class="card col-md-4 mb-3 card-top-bottom-padding">
+		<div class="card-body card-body-tiny-padding">
+		<h3>
 		{{#checkoff}}
 			{{title}}
 		{{/checkoff}}
 		{{^checkoff}}
-			<input type='text' name='title' value="{{title}}"/>
+			<input class="col-md-12" type='text' name='title' value="{{title}}"/>
 		{{/checkoff}}
-		</h2>
+		</h3>
 		<div>
 {{^checkoff}}
 			<div class="">
@@ -37,7 +42,7 @@
 				<li class="list-group-item list-group-item-info">
 	{{^checkoff}}
 					<input class="hidden" type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
-					<input type='text' name="item-{{-index}}" value="{{name}}"/>
+					<input class="col-md-10" type='text' name="item-{{-index}}" value="{{name}}"/>
 	{{/checkoff}}					
 	{{#checkoff}}
 					<input type='checkbox' id="check-off-{{-index}}" name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
@@ -47,12 +52,14 @@
 				</li>
 {{/order.items}}
 				<li class="new-item-to-clone hidden list-group-item list-group-item-info">
-					<input type='text' class="hidden" name="newitem"/>
+					<input class="col-md-10 hidden" type='text' name="newitem"/>
 					<label class="trash-node-to-hide btn btn-glyphicon" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 				</li>
 			</div>
 			</ul>
-		</div>	
+		</div>
+		</div>
+		</div>
 	</form>
 	<script>
 	$(function() {

@@ -1,11 +1,6 @@
 body 
 {
-	padding: 5px;
-}
-
-header 
-{
-	padding: 5px;	
+	padding: 15px;
 }
 
 input[type=checkbox] + label {
@@ -16,6 +11,29 @@ input[type=checkbox]:checked + label {
 	font-weight: normal;
 	text-decoration: line-through;
 } 
+
+h3 {
+	color: #4285F4;
+}
+
+h2 {
+	font-weight: bold;
+	color: #4285F4;
+}
+
+h2 span{
+	color: #BEE5EB;
+}
+
+.card-top-bottom-padding
+{
+	padding-top:5px;
+	padding-bottom: 15px;
+}
+
+.card-body-tiny-padding {
+	padding: 5px;
+}
 
 .hidden {
 	display: none;
@@ -32,5 +50,5 @@ input[type=checkbox]:checked + label {
 }
 
 .btn-glyphicon {
-	padding: 5px;
+	padding: 5px 15px 5px 15px;
 }

@@ -7,23 +7,28 @@
 	<link href="/styles/styles.css" rel="stylesheet">
 </head>
 <body>
-<div>
-	<h2>Lista de Pedidos</h2>
-	<header class="">
-		<a href="/new"><button class="btn btn-primary">Crear Pedido</button></a>
-	</header>
-
-	<div class="list-group">
-		{{#orders}}
-		<div class="list-group-item list-group-item-info">
-			<a href=/show/{{id}}>{{title}}</a>
-			<a href="/delete/{{id}}"><label class="btn btn-glyphicon" onClick="return confirm('Está seguro?');"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label></a>
+	<h2>Lista <span>Pedidos<span></h2>
+	<div class="card col-md-12 mb-3">
+		<div class="card-body card-body-tiny-padding">
+			<a href="/new"><button class="btn btn-primary">Crear Pedido</button></a>
 		</div>
-		{{/orders}}
-	<div>
-	{{^orders}}
-	<label>Todavia no hay pedidos que mostrar.</label>
-	{{/orders}}	
-</div>	
+	</div>
+	<div class="card col-md-4 mb-3 card-top-bottom-padding">
+		<div class="card-body card-body-tiny-padding">
+			<div class="list-group">
+				{{#orders}}
+				<div class="list-group-item list-group-item-info">
+					<a href=/show/{{id}}>{{title}}</a>
+					<a href="/delete/{{id}}"><label class="btn btn-glyphicon" onClick="return confirm('Está seguro?');"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label></a>
+				</div>
+				{{/orders}}
+				{{^orders}}
+				<div class="list-group-item list-group-item-info">
+					Todavia no hay pedidos que mostrar.
+				</div>
+				{{/orders}}	
+			</div>
+		</div>
+	</div>
 </body>
 </html>
