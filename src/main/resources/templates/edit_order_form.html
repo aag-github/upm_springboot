@@ -24,7 +24,7 @@
 			{{title}}
 		{{/checkoff}}
 		{{^checkoff}}
-			<input class="col-md-12" type='text' name='title' value="{{title}}"/>
+			<input class="col-md-12" type='text' id="title" name='title' value="{{title}}"/>
 		{{/checkoff}}
 		</h3>
 		<div>
@@ -67,6 +67,7 @@
 	$(function() {
 {{^order.items}}
 		addItem();
+		$("input#title").focus();
 {{/order.items}}
 		configSaveButton();
 		configDeleteItemButtons();
