@@ -12,7 +12,7 @@ import alberto.alvarez.garcia.models.OrderItem;
 import alberto.alvarez.garcia.models.OrderRepository;
 
 @Controller
-public class ShowOrderListController {
+public class OrderListController {
 	@Autowired
 	private OrderRepository orderRepository;
 		

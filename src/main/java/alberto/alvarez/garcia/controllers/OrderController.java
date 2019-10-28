@@ -2,14 +2,11 @@
 package alberto.alvarez.garcia.controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,20 +15,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.WebRequest;
-
 import alberto.alvarez.garcia.models.Order;
 import alberto.alvarez.garcia.models.OrderItem;
 import alberto.alvarez.garcia.models.OrderRepository;
 
 @Controller
-public class ModifyOrderController {
+public class OrderController {
 	@Autowired
 	private OrderRepository orderRepository;
 		
-	@PostConstruct
-	void init() {
-	}
+	@GetMapping("/show/{id}")
+	public String showOrder(Model model, @PathVariable Long id) {
+		model.addAttribute("order", orderRepository.findById(id).get());
+		return "show_order";
+	}	
 	
 	@GetMapping("/new")
 	public String newOrder(Model model) {
@@ -59,6 +56,15 @@ public class ModifyOrderController {
 		return "edit_order_form";
 	}
 
+	@GetMapping("/delete/{id}")
+	public String deleteOrder(Model model, @PathVariable Long id) {
+		Optional<Order> order = orderRepository.findById(id); 
+
+		orderRepository.delete(order.get());
+		
+		return "redirect:/";
+	}
+	
 	@PostMapping("/create")
 	public String createOrder(Model model, @RequestParam String title, @RequestParam List<String> newitem) {
 
@@ -89,15 +95,6 @@ public class ModifyOrderController {
 		return "redirect:/show/" + oldOrder.get().getId();
 	}
 	
-	@GetMapping("/delete/{id}")
-	public String deleteOrder(Model model, @PathVariable Long id) {
-		Optional<Order> order = orderRepository.findById(id); 
-
-		orderRepository.delete(order.get());
-		
-		return "redirect:/";
-	}
-
 	private Order buildNewOrder(String title, List<String>newItems) {
 		Order order = new Order(title);
 		addNewItems(newItems, order);

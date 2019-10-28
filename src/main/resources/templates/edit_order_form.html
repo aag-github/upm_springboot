@@ -42,7 +42,7 @@
 				<li class="list-group-item list-group-item-info">
 	{{^checkoff}}
 					<input class="hidden" type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
-					<input class="col-md-10" type='text' name="item-{{-index}}" value="{{name}}"/>
+					<input class="" type='text' name="item-{{-index}}" value="{{name}}"/>
 	{{/checkoff}}					
 	{{#checkoff}}
 					<div class="custom-control custom-checkbox float-left">
@@ -54,7 +54,7 @@
 				</li>
 {{/order.items}}
 				<li class="new-item-to-clone hidden list-group-item list-group-item-info">
-					<input class="col-md-10 hidden" type='text' name="newitem"/>
+					<input class="hidden" type='text' name="newitem"/>
 					<label class="trash-node-to-hide btn btn-glyphicon" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 				</li>
 			</div>
