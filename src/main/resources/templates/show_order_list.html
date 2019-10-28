@@ -1,12 +1,15 @@
 <html>
 <head>
 	<meta charset="UTF-8"/>
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<script src="/mdb/js/bootstrap.js"></script>	
 	<link href="/mdb/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/mdb/css/mdb.min.css" rel="stylesheet">
 	<script src="https://code.iconify.design/1/1.0.3/iconify.min.js"></script>
 	<link href="/styles/styles.css" rel="stylesheet">
 </head>
 <body>
+	{{> delete_order_confirm_dialog }}
 	<h2>Lista <span>Pedidos<span></h2>
 	<div class="card col-md-12 mb-3">
 		<div class="card-body card-body-tiny-padding">
@@ -19,7 +22,7 @@
 				{{#orders}}
 				<div class="list-group-item list-group-item-info">
 					<a href=/show/{{id}}>{{title}}</a>
-					<a href="/delete/{{id}}"><label class="btn btn-glyphicon" onClick="return confirm('Está seguro?');"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label></a>
+					<button class="btn btn-glyphicon delete_order_confirm_dialog" value="/delete/{{id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>										
 				</div>
 				{{/orders}}
 				{{^orders}}
@@ -30,5 +33,10 @@
 			</div>
 		</div>
 	</div>
+	<script>
+	$(function() {
+		setupDeleteOrderConfirmDialog();
+	});	
+	</script>	
 </body>
 </html>
