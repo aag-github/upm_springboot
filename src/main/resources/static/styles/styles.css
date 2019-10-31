@@ -35,6 +35,10 @@ h2 span{
 	padding: 5px;
 }
 
+.add_button {
+	padding: 10px;
+}
+
 .hidden {
 	display: none;
 }

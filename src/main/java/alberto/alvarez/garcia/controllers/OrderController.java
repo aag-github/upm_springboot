@@ -28,7 +28,7 @@ public class OrderController {
 	public String showOrder(Model model, @PathVariable Long id) {
 		Optional<Order> order = orderRepository.findById(id);		
 		if (!order.isPresent()) {
-			return "show_order_not_found";
+			return "error_order_not_found";
 		}
 
 		model.addAttribute("order", order.get());		
@@ -46,7 +46,7 @@ public class OrderController {
 	public String editOrder(Model model, @PathVariable Long id) {
 		Optional<Order> order = orderRepository.findById(id);		
 		if (!order.isPresent()) {
-			return "show_order_not_found";
+			return "error_order_not_found";
 		}
 
 		model.addAttribute("order", order.get());
@@ -59,7 +59,7 @@ public class OrderController {
 	public String checkoffOrder(Model model, @PathVariable Long id) {
 		Optional<Order> order = orderRepository.findById(id);		
 		if (!order.isPresent()) {
-			return "show_order_not_found";
+			return "error_order_not_found";
 		}
 
 		model.addAttribute("order", order.get());
@@ -73,7 +73,7 @@ public class OrderController {
 	public String deleteOrder(Model model, @PathVariable Long id) {
 		Optional<Order> order = orderRepository.findById(id);
 		if (!order.isPresent()) {
-			return "show_order_not_found";
+			return "error_order_not_found";
 		}
 
 		orderRepository.delete(order.get());		
@@ -105,7 +105,7 @@ public class OrderController {
 	public String updateChecked(Model model, @PathVariable Long id, @RequestParam Map<String,String> allParams) {
 		Optional<Order> oldOrder = orderRepository.findById(id);
 		if (!oldOrder.isPresent()) {
-			return "show_order_not_found";
+			return "error_order_not_found";
 		}
 
 		updateCheckedOffOrder(allParams, oldOrder.get());
