@@ -26,7 +26,12 @@ public class OrderController {
 		
 	@GetMapping("/show/{id}")
 	public String showOrder(Model model, @PathVariable Long id) {
-		model.addAttribute("order", orderRepository.findById(id).get());
+		Optional<Order> order = orderRepository.findById(id);		
+		if (!order.isPresent()) {
+			return "show_order_not_found";
+		}
+
+		model.addAttribute("order", order.get());		
 		return "show_order";
 	}	
 	
@@ -39,29 +44,39 @@ public class OrderController {
 	
 	@GetMapping("/edit/{id}")
 	public String editOrder(Model model, @PathVariable Long id) {
-		Order order = orderRepository.findById(id).get();
-		model.addAttribute("order", order);
+		Optional<Order> order = orderRepository.findById(id);		
+		if (!order.isPresent()) {
+			return "show_order_not_found";
+		}
+
+		model.addAttribute("order", order.get());
 		model.addAttribute("action", "/update/" + id);
-		model.addAttribute("title", order.getTitle());
+		model.addAttribute("title", order.get().getTitle());
 		return "edit_order_form";
 	}
 
 	@GetMapping("/checkoff/{id}")
 	public String checkoffOrder(Model model, @PathVariable Long id) {
-		Order order = orderRepository.findById(id).get();
-		model.addAttribute("order", order);
+		Optional<Order> order = orderRepository.findById(id);		
+		if (!order.isPresent()) {
+			return "show_order_not_found";
+		}
+
+		model.addAttribute("order", order.get());
 		model.addAttribute("action", "/update_checked/" + id);
-		model.addAttribute("title", order.getTitle());
+		model.addAttribute("title", order.get().getTitle());
 		model.addAttribute("checkoff", true);		
 		return "edit_order_form";
 	}
 
 	@GetMapping("/delete/{id}")
 	public String deleteOrder(Model model, @PathVariable Long id) {
-		Optional<Order> order = orderRepository.findById(id); 
+		Optional<Order> order = orderRepository.findById(id);
+		if (!order.isPresent()) {
+			return "show_order_not_found";
+		}
 
-		orderRepository.delete(order.get());
-		
+		orderRepository.delete(order.get());		
 		return "redirect:/";
 	}
 	
@@ -89,6 +104,10 @@ public class OrderController {
 	@PostMapping("/update_checked/{id}")
 	public String updateChecked(Model model, @PathVariable Long id, @RequestParam Map<String,String> allParams) {
 		Optional<Order> oldOrder = orderRepository.findById(id);
+		if (!oldOrder.isPresent()) {
+			return "show_order_not_found";
+		}
+
 		updateCheckedOffOrder(allParams, oldOrder.get());
 		orderRepository.save(oldOrder.get());		
 		
