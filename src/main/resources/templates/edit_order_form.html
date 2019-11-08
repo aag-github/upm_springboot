@@ -8,6 +8,7 @@
 	<script src="/scripts/edit_order_form.js"></script>
 </head>
 <body>
+<div class="main-win">
 	<h2>Edici&oacute;n <span>Pedido</span></h2>
 
 	<form action="{{action}}" method="post">
@@ -42,7 +43,7 @@
 				<li class="list-group-item list-group-item-info">
 	{{^checkoff}}
 					<input class="hidden" type='checkbox' name="checked-{{-index}}" {{#checked}}checked{{/checked}}/>
-					<input class="" type='text' name="item-{{-index}}" value="{{name}}"/>
+					<input class="item-text-box" type='text' name="item-{{-index}}" value="{{name}}"/>
 	{{/checkoff}}					
 	{{#checkoff}}
 					<div class="custom-control custom-checkbox float-left">
@@ -50,11 +51,11 @@
 						<label class="custom-control-label" for="check-off-{{-index}}">{{name}}</label>
 					</div>
 	{{/checkoff}}					
-					<label for="checked-{{-index}}" class="trash-node-to-hide btn btn-glyphicon hidden" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>&nbsp;
+					<label for="checked-{{-index}}" class="m-1 trash-node-to-hide btn btn-glyphicon hidden" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 				</li>
 {{/order.items}}
 				<li class="new-item-to-clone hidden list-group-item list-group-item-info">
-					<input class="hidden" type='text' name="newitem"/>
+					<input class="hidden item-text-box" type='text' name="newitem"/>
 					<label class="trash-node-to-hide btn btn-glyphicon" onClick="deleteItem(this);"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></label>
 				</li>
 			</div>
@@ -74,5 +75,6 @@
 		$("input").on("keyup", inputBoxKeyUpHandler);
 	});
 	</script>
+</div>	
 </body>
 </html>

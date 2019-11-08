@@ -58,3 +58,11 @@ h2 span{
 	padding: 5px 15px 5px 15px;
 	margin: 0 0 0 20;
 }
+
+.main-win {
+	max-width:55em;
+}
+
+.item-text-box {
+	width:80%;
+}
