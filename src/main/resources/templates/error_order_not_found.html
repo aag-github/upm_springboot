@@ -6,14 +6,15 @@
 	<link href="/styles/styles.css" rel="stylesheet">
 </head>
 <body>
+<div class="main-win">
 	<h2 class="alert alert-danger"><strong>Error</strong></h2>
 	<div class="card col-md-12 mb-3">
 		<nav class="card-body card-body-tiny-padding">
 			<a href="/"><button class="btn btn-primary">Lista de pedidos</button></a>			
 		</nav>
 	</div>
-	<div class="card col-md-4 mb-3 card-top-bottom-padding">
-		<div class="card-body card-body-tiny-padding">
+	<div class="card card-top-bottom-padding">
+		<div class="card-body">
 			<div class="list-group">
 				<div class="list-group-item list-group-item-info">
 					Pedido no encontrado: {{ id }}
@@ -21,5 +22,6 @@
 			</div>
 		</div>
 	</div>
+</div>
 </body>
 </html>
