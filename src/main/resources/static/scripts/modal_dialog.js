@@ -1,7 +1,7 @@
 var newUrl;
 var modalConfirm = function(class_name){
   $(class_name).on("click", function(){
-	  newUrl = document.activeElement.value;
+    newUrl = document.activeElement.value;
     $("#mi-modal").modal('show');
   });
 
