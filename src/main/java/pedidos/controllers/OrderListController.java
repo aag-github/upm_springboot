@@ -1,5 +1,5 @@
 
-package alberto.alvarez.garcia.controllers;
+package pedidos.controllers;
 
 import javax.annotation.PostConstruct;
 
@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import alberto.alvarez.garcia.models.Order;
-import alberto.alvarez.garcia.models.OrderItem;
-import alberto.alvarez.garcia.models.OrderRepository;
+
+import pedidos.models.Order;
+import pedidos.models.OrderItem;
+import pedidos.models.OrderRepository;
 
 @Controller
 public class OrderListController {

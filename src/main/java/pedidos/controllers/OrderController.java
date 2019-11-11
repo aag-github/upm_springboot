@@ -1,5 +1,5 @@
 
-package alberto.alvarez.garcia.controllers;
+package pedidos.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import alberto.alvarez.garcia.models.Order;
-import alberto.alvarez.garcia.models.OrderItem;
-import alberto.alvarez.garcia.models.OrderRepository;
+
+import pedidos.models.Order;
+import pedidos.models.OrderItem;
+import pedidos.models.OrderRepository;
 
 @Controller
 public class OrderController {

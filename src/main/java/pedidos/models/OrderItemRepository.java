@@ -1,4 +1,4 @@
-package alberto.alvarez.garcia.models;
+package pedidos.models;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

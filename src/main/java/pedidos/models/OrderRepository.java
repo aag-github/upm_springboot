@@ -1,4 +1,4 @@
-package alberto.alvarez.garcia.models;
+package pedidos.models;
 
 import java.util.List;
 
